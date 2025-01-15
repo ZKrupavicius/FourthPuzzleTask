@@ -28,8 +28,10 @@ def count_xmas_words(map_) -> int:
 
 def check_for_mas(buffer) -> int:
     counter = 0
-    if ''.join(buffer) == 'MAS':
-        counter += 1
+    new_buffer = [buffer[n:n + 3] for n in range(0, len(buffer), 3)]
+    for value in new_buffer:
+        if "".join(value) == 'MAS':
+            counter += 1
     return counter
 
 
@@ -40,44 +42,30 @@ def count_words_algorithm(x, y, map_) -> int:
     for i in range(x + 1, x + 4):
         if i < len(map_):
             buffer_of_mas_string.append(map_[y][i])
-    total_count += check_for_mas(buffer_of_mas_string)
-    buffer_of_mas_string = []
 
     for i in range(x - 1, x - 4, -1):
         if i >= 0:
             buffer_of_mas_string.append(map_[y][i])
-    total_count += check_for_mas(buffer_of_mas_string)
-    buffer_of_mas_string = []
 
     for i in range(y + 1, y + 4):
         if i < len(map_):
             buffer_of_mas_string.append(map_[i][x])
-    total_count += check_for_mas(buffer_of_mas_string)
-    buffer_of_mas_string = []
 
     for i in range(y - 1, y - 4, -1):
         if i >= 0:
             buffer_of_mas_string.append(map_[i][x])
-    total_count += check_for_mas(buffer_of_mas_string)
-    buffer_of_mas_string = []
 
     for i in range(1, 4):
         if x + i < len(map_) and y + i < len(map_):
             buffer_of_mas_string.append(map_[y + i][x + i])
-    total_count += check_for_mas(buffer_of_mas_string)
-    buffer_of_mas_string = []
 
     for i in range(1, 4):
         if x - i >= 0 and y - i >= 0:
             buffer_of_mas_string.append(map_[y - i][x - i])
-    total_count += check_for_mas(buffer_of_mas_string)
-    buffer_of_mas_string = []
 
     for i in range(1, 4):
         if x + i < len(map_) and y - i >= 0:
             buffer_of_mas_string.append(map_[y - i][x + i])
-    total_count += check_for_mas(buffer_of_mas_string)
-    buffer_of_mas_string = []
 
     for i in range(1, 4):
         if x - i >= 0 and y + i < len(map_):
@@ -91,12 +79,3 @@ if __name__ == "__main__":
     f_lines = read_file("input.txt")
     count_words = count_xmas_words(make_map(f_lines))
     print(count_words)
-
-    # container = [(*(0, 0, 0), *range(1, 4)), ((0, 0, 0), (1, 2, 3))]  # right check
-    # for j in container:
-    #     print(j)
-    # print(container[0][1])
-
-    # iterate with tuple and with one and the other
-
-    # container [((y,y1,y2), range(x, x1,x2)), ()]
