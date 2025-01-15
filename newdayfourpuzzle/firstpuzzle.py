@@ -86,11 +86,17 @@ def count_words_algorithm(x, y, map_) -> int:
 
     return total_count
 
-    # container [((y,y1,y2), range(x, x1,x2)), ()]
-
 
 if __name__ == "__main__":
     f_lines = read_file("input.txt")
     count_words = count_xmas_words(make_map(f_lines))
     print(count_words)
-    container = [((0, 0, 0), range(1, 4))] #right check
+
+    # container = [(*(0, 0, 0), *range(1, 4)), ((0, 0, 0), (1, 2, 3))]  # right check
+    # for j in container:
+    #     print(j)
+    # print(container[0][1])
+
+    # iterate with tuple and with one and the other
+
+    # container [((y,y1,y2), range(x, x1,x2)), ()]
