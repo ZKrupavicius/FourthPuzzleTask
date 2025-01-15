@@ -22,7 +22,7 @@ def count_xmas_words(map_) -> int:
         for x, value in enumerate(row):
             if value != 'X':
                 continue
-            count += check_if_direction_is_in_bounds(x, y, map_)
+            count += count_words_algorithm(x, y, map_)
     return count
 
 
@@ -33,7 +33,7 @@ def check_for_mas(buffer) -> int:
     return counter
 
 
-def check_if_direction_is_in_bounds(x, y, map_) -> int:
+def count_words_algorithm(x, y, map_) -> int:
     buffer_of_mas_string = []
     total_count = 0
 
@@ -93,3 +93,4 @@ if __name__ == "__main__":
     f_lines = read_file("input.txt")
     count_words = count_xmas_words(make_map(f_lines))
     print(count_words)
+    container = [((0, 0, 0), range(1, 4))] #right check
