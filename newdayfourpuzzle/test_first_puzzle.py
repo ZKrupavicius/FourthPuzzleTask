@@ -15,9 +15,8 @@ def test_count_of_words():
     assert count_words_algorithm(x, y, map_) == 2, "Incorrect amount of MAS words with given coordinates"
 
 
-def test_wrong_x_input():
-    x = "A"
-    y = 3
+@pytest.mark.parametrize("x,y", [("A", 3), pytest.param(0, 4, marks=pytest.mark.xfail), ("X", "P")])
+def test_wrong_coordinates_input(x: int, y: int):
     map_ = [
         ['M', 'X', 'M', 'A', 'S'],
         ['X', 'X', 'M', 'X', 'X'],
@@ -28,7 +27,7 @@ def test_wrong_x_input():
         count_words_algorithm(x, y, map_)
 
 
-def test_wrong_map_input():
+def test_type_of_map_inputs():
     x = 4
     y = 3
     map_ = [
@@ -41,9 +40,8 @@ def test_wrong_map_input():
         count_words_algorithm(x, y, map_)
 
 
-def test_out_of_bounds_coordinates():
-    x = 0
-    y = 8
+@pytest.mark.parametrize("x,y", [(-1, 2), (2, 15), (-1, 12)])
+def test_out_of_bounds_coordinates(x: int, y: int):
     map_ = [
         ['M', 'X', 'M', 'A', 'S'],
         ['X', 'X', 'M', 'X', 'X'],
@@ -79,9 +77,11 @@ def test_empty_map():
         count_xmas_words(map_)
 
 
-def test_make_map():
-    first_map = ['MASXA', 'XXMAS']
-    result_map = [['M', 'A', 'S', 'X', 'A'], ['X', 'X', 'M', 'A', 'S']]
+@pytest.mark.parametrize("first_map, result_map",
+                         [(['MASXA', 'XXMAS'], [['M', 'A', 'S', 'X', 'A'], ['X', 'X', 'M', 'A', 'S']]),
+                          (['MAS', 'XAM'], [['M', 'A', 'S'], ['X', 'A', 'M']]),
+                          (pytest.param(['XAM', 'XAM'], [['M', 'S', 'X'], ['X', 'A', 'M']], marks=pytest.mark.xfail))])
+def test_make_map(first_map: list, result_map: list):
     assert make_map(first_map) == result_map, "Incorrect creation of the map"
 
 
