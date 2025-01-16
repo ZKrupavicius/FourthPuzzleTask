@@ -1,4 +1,4 @@
-from firstpuzzle import count_words_algorithm, count_xmas_words, make_map
+from firstpuzzle import count_words_algorithm, count_xmas_words, make_map, read_file
 
 
 def test_count_of_words():
@@ -27,3 +27,11 @@ def test_make_map():
     first_map = ['MASXA', 'XXMAS']
     result_map = [['M', 'A', 'S', 'X', 'A'], ['X', 'X', 'M', 'A', 'S']]
     assert make_map(first_map) == result_map, "Incorrect creation of the map"
+
+def test_make_from_file_to_list():
+    text_file = "input.txt"
+    assert type(read_file(text_file)) == list, "Return is not a list"
+
+def test_if_file_empty():
+    text_file = "input.txt"
+    assert len(read_file(text_file)) != 0, "File is empty"
