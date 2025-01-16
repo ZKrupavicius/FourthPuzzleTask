@@ -44,7 +44,7 @@ def count_words_algorithm(x: int, y: int, map_: list) -> int:
         for idx2 in idx:
             if type(idx2) != str:
                 raise Exception("List contains different variables, not only string")
-    if y > len(map_) or x > len(map_):
+    if y > len(map_) or x > len(map_) or y < 0 or x < 0:
         raise Exception("Coordinates are out of bounds")
 
     total_count = 0
